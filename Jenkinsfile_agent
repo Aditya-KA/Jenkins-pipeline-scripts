@@ -2,8 +2,9 @@ pipeline {
     agent none
 
     stages {
-    agent { label 'slave_2' }
         stage('stage1') {
+        agent { label 'slave_2' }
+
             steps {
                 echo "I'm running slave1 agent"
             }
