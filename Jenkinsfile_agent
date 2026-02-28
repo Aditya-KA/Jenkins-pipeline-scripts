@@ -1,0 +1,18 @@
+pipeline {
+    agent none
+
+    stages {
+    agent ( label 'slave2')
+        stage('stage1') {
+            steps {
+                echo "I'm running slave1 agent"
+            }
+        }
+
+        stage('stage2') {
+            steps {
+                echo "I'm running slave2 agent"
+            }
+        }
+    }
+}
