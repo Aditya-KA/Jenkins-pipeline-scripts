@@ -1,0 +1,22 @@
+pipeline {
+    agent none
+
+    parameters {
+        string(name: 'Name', defaultValue: 'Bantu', description: 'Enter your name' )
+        text(name: 'Biography', defaultValue: 'Hi ${params.Name}', description: 'Enter min 30 words')
+        choice(name: 'Choose', choices: ['test','QA', 'pre-prod', 'Prod'],description: 'Select one' )
+    }
+
+    stages {
+        stage('${params.choose}'){
+            agent {label 'Slave_1'}
+
+            steps {
+                echo "Name: ${paramas.Name}"
+                echo "Biography: ${paramas.Biography}"
+                echo "Choose: ${paramas.Choose}"
+
+            }
+        }
+    }
+}
