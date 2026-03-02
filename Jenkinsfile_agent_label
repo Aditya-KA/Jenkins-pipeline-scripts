@@ -8,7 +8,7 @@ pipeline {
             steps {
                 echo "I'm running stage-1"
                 sh '''
-                whoami
+                sudo -i
                 '''
             }
         }
@@ -17,7 +17,7 @@ pipeline {
             steps {
                 echo "I'm running stage-2"
                 sh '''
-                who
+                whoami
                 '''
             }
         }
