@@ -1,0 +1,42 @@
+pipeline {
+    agent none
+
+    stages {
+        stage('start stage'){
+            agent {label 'Slave_2'}
+
+            steps {
+                echo "starting stage with non parllel execution and executing job in node 2"
+
+            }
+        }
+
+        stage('parllel block'){
+            parllel {
+                stage("parlel stage1"){
+                    agent {label 'Slave_2'}
+
+                    steps {
+                        echo "this is the first parllel block executing on node 2"
+                    }
+                }
+
+                stage('parlel stage2'){
+                    agent {label 'Slave_1'}
+
+                    steps {
+                        echo "this is second parllel block executing on node 1"
+                    }
+                }
+            }
+        }
+
+        stage('Final stage'){
+            agent {label 'Slave_1'}
+
+            steps {
+                echo "non parlel final block executing on node 1"
+            }
+        }
+    }
+}
