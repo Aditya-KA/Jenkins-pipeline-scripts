@@ -8,7 +8,7 @@ pipeline {
     }
 
     stages {
-        stage('${params.choose}'){
+        stage('stage-1'){
             agent {label 'Slave_1'}
 
             steps {
