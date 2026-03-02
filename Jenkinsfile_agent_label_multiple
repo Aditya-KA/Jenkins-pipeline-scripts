@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'Slave_1 && Slave_2'}
+    agent {label 'slave-1 && Slave_2'}
     // agent {label 'Slave_1 || Slave_2'}
     // agent {label '!Slave_2'}
 
