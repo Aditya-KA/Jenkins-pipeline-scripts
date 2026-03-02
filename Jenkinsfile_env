@@ -1,0 +1,49 @@
+pipeline {
+    agent none
+
+    environment {
+        pipeline_user = 'Aditya'
+        pipeline_passwd = 'hjhjhjh'
+    }
+
+    stages {
+        stage('stage-1'){
+            agent {label 'Slave_2'}
+
+            environment {
+                stage_user = 'KA'
+                stage_passwd = 'jkhjhj'
+            }
+
+            steps {
+                echo "pipeline level user: ${env.pipeline_user}"
+                echo "pipeline level passwd: ${env.pipeline_passwd}"
+
+                sh '''
+                echo "stage level user: ${stage_user}"
+                echo "stage level passwd: ${stage_passwd}"
+                '''
+
+
+
+            }
+        }
+
+        stage('stage-2'){
+            agent {label 'Slave_1'}
+
+            steps {
+                echo "pipeline level user: ${env.pipeline_user}"
+                echo "pipeline level passwd: ${env.pipeline_passwd}"
+
+                sh '''
+                echo "stage level user: ${stage_user}"
+                echo "stage level passwd: ${stage_passwd}"
+                '''
+
+
+
+            }
+        }
+    }
+}
