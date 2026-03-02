@@ -12,7 +12,7 @@ pipeline {
         }
 
         stage('parllel block'){
-            parllel {
+            parallel {
                 stage("parlel stage1"){
                     agent {label 'Slave_2'}
 
