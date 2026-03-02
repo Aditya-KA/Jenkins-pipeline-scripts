@@ -1,0 +1,25 @@
+pipeline {
+    agent none
+
+    stages {
+        stage('stage-1'){
+            agent { label 'Slave_1'}
+
+            steps {
+                echo "Running on stage one"
+                sh "pwd"
+            }
+            
+        }
+
+        stage ('stage-2'){
+            agent { label 'Slave_2'}
+
+            steps {
+                echo "Running on stage two"
+                sh "pwd"
+            }
+        }
+
+    }
+}
