@@ -1,0 +1,25 @@
+pipeline {
+    agent {label 'Slave_1 && Slave_2'}
+    // agent {label 'Slave_1 || Slave_2'}
+    // agent {label '!Slave_2'}
+
+    stages {
+        stage('stage-1') {
+            steps{
+                echo "this is stage one"
+                sh "whoami"
+
+            }
+            
+        }
+
+        stage('stage-2'){
+            steps{
+                echo "this is stage two"
+                sh "pwd"
+            }
+
+        }
+    }   
+
+}
