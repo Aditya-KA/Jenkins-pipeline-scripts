@@ -1,0 +1,25 @@
+pipeline {
+    agent { label 'Slave_2' }
+    
+
+    stages {
+        stage('stage1') {
+
+            steps {
+                echo "I'm running stage-1"
+                sh '''
+                whoami
+                '''
+            }
+        }
+
+        stage('stage2') {
+            steps {
+                echo "I'm running stage-2"
+                sh '''
+                who
+                '''
+            }
+        }
+    }
+}
