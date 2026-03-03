@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'USER', defaultValue: 'root', description: 'Enter the login User Name')
+    }
+
+    environment {
+        ENV = 'PRE-PROD'
+    }
+
+    stages {
+        stage('CHECKOUT'){
+            steps {
+                git branch: 'feature', 
+                credentialsId: 'Github-cred', 
+                url: 'https://github.com/Aditya-KA/ITD.git'
+            }
+
+        }
+
+        stage('BRANCH CHECK'){
+            when {
+                branch 'feature'
+            }
+            steps {
+                sh "ls -lrt"
+            }
+        }
+
+        stage('PARAMETER CHECK'){
+            when {
+                expression {params.USER == 'builtinadmin'}
+                
+            }
+
+            steps {
+                sh "cat /etc/os-release"
+            }
+        }
+
+        stage('ENVIRONMENT CHECK'){
+            when {
+                environment {name: 'ENV', value: 'PRE-PROD'}
+            }
+
+            steps {
+                sh "whoami"
+            }
+        }
+    }
+}
