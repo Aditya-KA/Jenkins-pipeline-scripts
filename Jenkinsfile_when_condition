@@ -21,7 +21,9 @@ pipeline {
 
         stage('BRANCH CHECK'){
             when {
-                branch 'feature'
+                expression {
+                    env.GIT_BRANCH == 'origin/feature'
+                }
             }
             steps {
                 sh "ls -lrt"
