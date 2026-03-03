@@ -26,7 +26,6 @@ pipeline {
 
                     steps {
                         echo "this is second parllel block executing on node 1"
-                        sh "exit 1"
                     }
                 }
             }
