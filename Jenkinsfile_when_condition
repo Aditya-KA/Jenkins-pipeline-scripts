@@ -41,7 +41,7 @@ pipeline {
 
         stage('ENVIRONMENT CHECK'){
             when {
-                environment {name: 'ENV', value: 'PRE-PROD'}
+                environment name: 'ENV', value: 'PRE-PROD'
             }
 
             steps {
