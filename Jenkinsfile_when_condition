@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('CHECKOUT'){
             steps {
-                git branch: 'feature', 
+                git branch: 'origin/feature', 
                 credentialsId: 'Github-cred', 
                 url: 'https://github.com/Aditya-KA/ITD.git'
             }
