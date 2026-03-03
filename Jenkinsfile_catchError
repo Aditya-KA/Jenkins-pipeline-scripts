@@ -1,0 +1,47 @@
+pipeline {
+    agent none
+
+    stages {
+        stage('First stage'){
+            agent ( label 'Slave_2' )
+
+            steps {
+                echo "first stage of pipeline"
+                sh "uptime"
+            }
+        }
+
+        stage('Parallel stage'){
+            parallel {
+                stage('Windows testing'){
+                    agent ( label 'Slave_2' )
+
+                    steps {
+                        echo "first stage of parllel block"
+                        sh "df -h"
+                    }
+                }
+
+                stage('MacOS Testing'){
+                    agent ( label 'Slave_1' )
+                    
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                            echo "second stage of parllel block having error"
+                            sh "exit 1"
+                        }
+                    }
+            }
+        }
+    }
+
+        stage('Final Stage'){
+            agent ( label 'Slave_1' )
+
+            steps {
+                echo "Final block execution"
+                sh "uname -r"
+            }
+        }
+    }
+}
