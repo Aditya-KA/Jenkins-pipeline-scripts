@@ -22,7 +22,7 @@ pipeline {
         stage('BRANCH CHECK'){
             when {
                 expression {
-                    env.GIT_BRANCH == 'origin/feature'
+                    return env.GIT_BRANCH == 'origin/feature'
                 }
             }
             steps {
