@@ -12,9 +12,7 @@ pipeline {
     stages {
         stage('CHECKOUT'){
             steps {
-                git branch: 'feature', 
-                credentialsId: 'Github-cred', 
-                url: 'https://github.com/Aditya-KA/ITD.git'
+                git credentialsId: 'Github-cred', url: 'https://github.com/Aditya-KA/ITD.git'
             }
 
         }
@@ -22,7 +20,7 @@ pipeline {
         stage('BRANCH CHECK'){
             when {
                 expression {
-                    return env.GIT_BRANCH == 'origin/feature'
+                    return env.GIT_BRANCH == 'origin/master'
                 }
             }
             steps {
