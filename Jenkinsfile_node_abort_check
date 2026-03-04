@@ -1,14 +1,16 @@
 pipeline{
-    agent any
+    agent none
 
     stages {
         stage('Slave_1'){
+            agent (label 'Slave_2')
             steps {
                 sh "sleep 50"
             }
         }
 
         stage('Slave_2'){
+            agent (label 'Slave_1')
             steps{
                 sh "uname"
             }
