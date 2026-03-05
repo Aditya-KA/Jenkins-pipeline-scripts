@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     options {
-        buildDiscorder(logRotator(numToKeepStr: '2'))
+        buildDiscarder(logRotator(numToKeepStr: '2'))
         disableConcurrentBuilds()
         disableResume()
         retry(3)
