@@ -1,17 +1,23 @@
 pipeline{
-    agent none
+    agent any
+
+    options {
+        buildDiscorder(logRotator(numToKeepStr: '2'))
+        disableConcurrentBuilds()
+        disableResume()
+        retry(3)
+        timeout(time: 1, unit: 'MINUTES')
+    }
 
     stages {
-        stage('Slave_1'){
-            agent {label 'Slave_1'}
+        stage('Stage1'){
             steps {
                 
-                sh "uname"
+                sh "sleep 30"
             }
         }
 
-        stage('Slave_2'){
-            agent {label 'Slave_2'}
+        stage('Stage2'){
             steps{
                 sh "sleep 50"
             }
