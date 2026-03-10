@@ -8,8 +8,8 @@ pipeline {
             steps {
                 echo "<--- listing all file and directories in /var/lib/jenkins --->"
                 sh ''' cd /var/lib/jenkins/jobs
-                ls -lrt
-                sudo cp -rf /var/lib/jenkins/jobs /Jobs_backup/jobs_$(date +%d-%m-%y"_"%H:%M:%S) '''
+                ls -lrt '''
+                 
             }
             
         }
@@ -27,7 +27,9 @@ pipeline {
 
             steps {
                 echo "<----- listing the backup data ----->"
-                sh "sudo cp -rf /var/lib/jenkins/jobs /Jobs_backup/jobs_$(date +%d-%m-%y'_'%H:%M:%S)"
+                sh '''
+                sudo cd /Jobs_backup
+                ls -lrt '''
             }
             
         }
