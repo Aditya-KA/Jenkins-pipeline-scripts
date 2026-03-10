@@ -24,6 +24,27 @@ pipeline {
             }
             
         }
+        // stage('Deleting old backup'){
+        //     agent {label 'Master'}
+
+        //     steps {
+        //         echo "<------ Backing up to /Jobs_backup ----->"
+        //         sh '''
+        //         count = ls -lrt|wc -l
+        //         backup_time = ls -lrt|awk '{print $8}'
+        //         current_time = date +%H:%M -d "1 minute ago"
+    
+
+        //         if [[ $count -ge 2 ]]; then
+        //             if [[ ${backup_time}  ${current_time} ]]: then
+
+
+        //             fi
+        //         fi
+        //         '''
+        //     }
+            
+        // }
         stage('List of backup'){
             agent {label 'Master'}
 
