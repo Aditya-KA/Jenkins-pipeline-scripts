@@ -6,9 +6,10 @@ pipeline {
             agent {label 'Master'}
 
             steps {
-                echo "checking pwd"
+                echo ""
                 sh ''' cd /var/lib/jenkins/jobs
-                ls -lrt '''
+                ls -lrt
+                sudo cp -rf /var/lib/jenkins/jobs /Jobs_backup/jobs_$(date +%d-%m-%y" "%H:%M:%S) '''
             }
             
         }
