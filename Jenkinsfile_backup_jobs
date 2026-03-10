@@ -1,0 +1,15 @@
+pipeline {
+    agent none
+
+    stages {
+        stage('Master Node'){
+            agent {label 'Master'}
+
+            steps {
+                echo "checking pwd"
+                sh "pwd"
+            }
+            
+        }
+    }
+}
