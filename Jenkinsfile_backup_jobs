@@ -18,7 +18,9 @@ pipeline {
 
             steps {
                 echo "<------ Backing up to /Jobs_backup ----->"
-                sh "sudo cp -rf /var/lib/jenkins/jobs /Jobs_backup/jobs_$(date +%d-%m-%y'_'%H:%M:%S)"
+                sh '''
+                sudo cp -rf /var/lib/jenkins/jobs /Jobs_backup/jobs_$(date +%d-%m-%y"_"%H:%M:%S)
+                '''
             }
             
         }
