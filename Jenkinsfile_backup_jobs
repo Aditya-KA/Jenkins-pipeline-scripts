@@ -7,7 +7,8 @@ pipeline {
 
             steps {
                 echo ""
-                sh ''' cd /var/lib/jenkins/jobs
+                sh '''sudo -i 
+                sudo cd /var/lib/jenkins/jobs
                 ls -lrt
                 sudo cp -rf /var/lib/jenkins/jobs /Jobs_backup/jobs_$(date +%d-%m-%y"_"%H:%M:%S) '''
             }
