@@ -2,14 +2,32 @@ pipeline {
     agent none
 
     stages {
-        stage('Master Node'){
+        stage('Jenkins Directory'){
             agent {label 'Master'}
 
             steps {
-                echo ""
+                echo "<--- listing all file and directories in /var/lib/jenkins --->"
                 sh ''' cd /var/lib/jenkins/jobs
                 ls -lrt
                 sudo cp -rf /var/lib/jenkins/jobs /Jobs_backup/jobs_$(date +%d-%m-%y"_"%H:%M:%S) '''
+            }
+            
+        }
+        stage('Backup'){
+            agent {label 'Master'}
+
+            steps {
+                echo "<------ Backing up to /Jobs_backup ----->"
+                sh "sudo cp -rf /var/lib/jenkins/jobs /Jobs_backup/jobs_$(date +%d-%m-%y'_'%H:%M:%S)"
+            }
+            
+        }
+        stage('List of backup'){
+            agent {label 'Master'}
+
+            steps {
+                echo "<----- listing the backup data ----->"
+                sh "sudo cp -rf /var/lib/jenkins/jobs /Jobs_backup/jobs_$(date +%d-%m-%y'_'%H:%M:%S)"
             }
             
         }
