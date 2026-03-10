@@ -7,7 +7,7 @@ pipeline {
 
             steps {
                 echo "<--- listing all file and directories in /var/lib/jenkins --->"
-                sh ''' cd /var/lib/jenkins/jobs
+                sh ''' cd /var/lib/jenkins
                 ls -lrt '''
                  
             }
@@ -17,30 +17,21 @@ pipeline {
             agent {label 'Master'}
 
             steps {
-                echo "<------ Backing up to /Jobs_backup ----->"
+                echo "<------ Backing up to /Jenkins_backup ----->"
                 sh '''
-                sudo cp -rf /var/lib/jenkins/jobs /Jobs_backup/jobs_$(date +%d-%m-%y"_"%H:%M:%S)
+                sudo cp -rf /var/lib/jenkins /Jenkins_backup/jenkins_$(date +%d-%m-%y"_"%H:%M:%S)
                 '''
             }
             
         }
-        // stage('Deleting old backup'){
+        // stage('Cleaning old BKP'){
         //     agent {label 'Master'}
 
         //     steps {
-        //         echo "<------ Backing up to /Jobs_backup ----->"
+        //         echo "<------ Deleting old backup ----->"
         //         sh '''
-        //         count = ls -lrt|wc -l
-        //         backup_time = ls -lrt|awk '{print $8}'
-        //         current_time = date +%H:%M -d "1 minute ago"
-    
-
-        //         if [[ $count -ge 2 ]]; then
-        //             if [[ ${backup_time}  ${current_time} ]]: then
-
-
-        //             fi
-        //         fi
+        //         cd /Jobs_backup
+        //         ls -lt|tail -1|xargs -I{} sudo rm -rf {}
         //         '''
         //     }
             
@@ -49,9 +40,9 @@ pipeline {
             agent {label 'Master'}
 
             steps {
-                echo "<----- listing the backup data ----->"
+                echo "<----- listing the Jenkins data ----->"
                 sh '''
-                cd /Jobs_backup
+                cd /Jenkins_backup
                 ls -lrt '''
             }
             
