@@ -30,7 +30,7 @@ pipeline {
             steps {
                 echo "<----- listing the backup data ----->"
                 sh '''
-                sudo cd /Jobs_backup
+                cd /Jobs_backup
                 ls -lrt '''
             }
             
