@@ -5,7 +5,7 @@ pipeline {
         string(name: 'Name', defaultValue: 'Bantu', description: 'Enter your name' )
         text(name: 'Biography', defaultValue: 'Hi', description: 'Enter min 30 words')
         choice(name: 'Choose', choices: ['test','QA', 'pre-prod', 'Prod'],description: 'Select one' )
-        booleanParam(name: 'Checkout', defaultValue: false, description: 'Please check box if required')
+        booleanParam(name: 'Checkout', defaultValue: true, description: 'Please check box if required')
     }
 
     stages {
