@@ -14,6 +14,8 @@ pipeline {
                 stage ('first stage in parllel block') {
                     steps {
                         echo "first stage in parllel block"
+                        sh "sleep 100"
+                    
                     }
                 }
 
@@ -28,6 +30,7 @@ pipeline {
                 stage ('third stage in parllel block') {
                     steps {
                         echo "third stage in parllel block"
+                        sh "sleep 100"
                     }
                 }
                 
