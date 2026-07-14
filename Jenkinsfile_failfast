@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    stages{
+        stage('initial stage') {
+            steps {
+                echo "hello this is initial stage"
+            }
+        }
+        stage('parllel block') {
+            parallel {
+                failFast true
+                stage ('first stage in parllel block') {
+                    steps {
+                        echo "first stage in parllel block"
+                    }
+                }
+
+                stage ('second stage in parllel block') {
+                    steps {
+                        echo "second stage in parllel block"
+
+                        sh "exit 1"
+                    }
+                }
+
+                stage ('third stage in parllel block') {
+                    steps {
+                        echo "third stage in parllel block"
+                    }
+                }
+                
+            }
+        }
+
+        stage('final stage') {
+            steps {
+                echo " this is final block"
+            }
+        }
+    }   
+
+      
+
+}
