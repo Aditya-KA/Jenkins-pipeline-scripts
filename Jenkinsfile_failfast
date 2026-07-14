@@ -22,11 +22,16 @@ pipeline {
                 stage ('second stage in parllel block') {
                     steps {
 
-                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-                            echo "second stage in parllel block"
+                        // catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                        //     echo "second stage in parllel block"
 
-                            sh "exit 1"
-                        }
+                        //     sh "exit 1"
+                        // }
+                        echo "second stage in parllel block"
+                        sh "exit 1"
+                        
+
+
                         
                     }
                 }
