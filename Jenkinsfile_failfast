@@ -8,11 +8,8 @@ pipeline {
             }
         }
         stage('parllel block') {
+            failFast true
             parallel {
-
-                options {
-                    failFast true
-                }
                 
                 stage ('first stage in parllel block') {
                     steps {
