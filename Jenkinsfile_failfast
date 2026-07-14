@@ -9,7 +9,11 @@ pipeline {
         }
         stage('parllel block') {
             parallel {
-                failFast true
+
+                options {
+                    failFast true
+                }
+                
                 stage ('first stage in parllel block') {
                     steps {
                         echo "first stage in parllel block"
