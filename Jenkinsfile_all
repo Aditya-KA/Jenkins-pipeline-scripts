@@ -9,7 +9,7 @@ pipeline{
 
     environment{
         APP = 'frontend'
-        URL = 'db_url'
+        DB = 'db_url'
     }
 
     stages{
@@ -30,7 +30,7 @@ pipeline{
                 script{
                     sh '''
                     echo "APP: ${env.APP}"
-                    echo "URL: ${env.URL}"
+                    echo "URL: ${env.DB}"
                     
                   ''' 
                 }
