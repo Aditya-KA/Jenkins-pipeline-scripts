@@ -9,7 +9,7 @@ pipeline{
 
     environment{
         APP = 'frontend'
-        URL = 'https://dns.com'
+        URL = 'db_url'
     }
 
     stages{
