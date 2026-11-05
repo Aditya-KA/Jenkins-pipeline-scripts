@@ -56,7 +56,6 @@ pipeline{
               checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'Github-cred', url: 'https://github.com/Aditya-KA/ip-app-python-flask-main.git']])
 
               sh '''
-              cd /home/ubuntu/jenkins_home/workspace
               ls -lrt
               '''
           }
