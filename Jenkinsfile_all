@@ -1,0 +1,52 @@
+pipeline{
+    agent none
+
+    parameters{
+        string(name: 'stringInput', defaultValue: 'Aditya', description: 'Enter name of employee')
+        choice(name: 'choose', choices: ['one','two','three'], description: 'select one')
+        booleanParam(name: 'tik', defaultValue: 'false', description: 'tik if you need')
+    }
+
+    environment{
+        APP = 'frontend'
+        URL = 'https://dns.com'
+    }
+
+    stages{
+        agent { label 'slave1' }
+        stage ('calling parameters'){
+            steps{
+                echo "String value: ${params.stringInput}"
+                echo "choice value: ${params.choose}"
+                echo "boolean value : ${params.tik}"
+            }
+        }
+        stage ('calling env'){
+            steps{
+                script{
+                    sh '''
+                    echo "APP: ${env.APP}"
+                    echo "URL: ${env.URL}"
+                    
+                  ''' 
+                }
+
+                
+            }
+        }
+      stage ('catchEroor stage'){
+          catchError(stageResult: 'FAILURE', buildResult: 'SUCCESS')
+          steps{
+              sh "exit 1" 
+          }
+      }
+      stage ('checkout stage'){
+          agent { label 'slave2' }
+
+          steps{
+
+              
+          }
+      }
+    }
+}
