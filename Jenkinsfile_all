@@ -40,8 +40,9 @@ pipeline{
         }
       stage ('catchEroor stage'){
           agent { label 'slave2' }
-          catchError(stageResult: 'FAILURE', buildResult: 'SUCCESS')
+        
           steps{
+              catchError(stageResult: 'FAILURE', buildResult: 'SUCCESS')
               sh "exit 1" 
           }
       }
