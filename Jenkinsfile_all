@@ -28,11 +28,11 @@ pipeline{
 
             steps{
                 script{
-                    sh '''
-                    echo "APP: ${env.APP}"
-                    echo "URL: ${env.DB}"
+                
+                     echo "APP: ${env.APP}"
+                     echo "URL: ${env.DB}"
                     
-                  ''' 
+                  
                 }
 
                 
