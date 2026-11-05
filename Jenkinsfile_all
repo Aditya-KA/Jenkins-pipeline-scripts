@@ -13,8 +13,10 @@ pipeline{
     }
 
     stages{
-        agent { label 'slave1' }
+        
         stage ('calling parameters'){
+            agent { label 'slave1' }
+
             steps{
                 echo "String value: ${params.stringInput}"
                 echo "choice value: ${params.choose}"
@@ -22,6 +24,8 @@ pipeline{
             }
         }
         stage ('calling env'){
+           agent { label 'slave1' }
+
             steps{
                 script{
                     sh '''
@@ -35,6 +39,7 @@ pipeline{
             }
         }
       stage ('catchEroor stage'){
+          agent { label 'slave2' }
           catchError(stageResult: 'FAILURE', buildResult: 'SUCCESS')
           steps{
               sh "exit 1" 
@@ -45,8 +50,12 @@ pipeline{
 
           steps{
 
-              
+              checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'Github-cred', url: 'https://github.com/Aditya-KA/ip-app-python-flask-main.git']])
+
+              sh '''ls -lrt
+              '''
           }
       }
+
     }
 }
