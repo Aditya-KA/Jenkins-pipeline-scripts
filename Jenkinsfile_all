@@ -106,7 +106,8 @@ pipeline{
             agent { label 'slave1' }
             when {
                 anyOf {
-                    environment name: 'APP', value: 'backend'; name: 'APP', value: 'frontend'
+                    environment name: 'APP', value: 'backend'
+                    environment name: 'APP', value: 'frontend'
                 
                 }
             }
@@ -119,7 +120,8 @@ pipeline{
             agent { label 'slave2' }
             when {
                 allOf{
-                    environment name: 'APP', value: 'backend'; name: 'APP', value: 'frontend'
+                    environment name: 'APP', value: 'backend'
+                    environment name: 'APP', value: 'frontend'
                     
 
                 }
