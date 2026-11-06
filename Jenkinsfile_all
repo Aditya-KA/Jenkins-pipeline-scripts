@@ -136,8 +136,10 @@ pipeline{
             stage ('stage-1'){
                 agent { label 'slave2' }
                 steps{
-                    echo "parllel block stage 1"
-                    sh "exit 1"
+                    catchError(stageResult: 'FAILURE', buildResult: 'SUCCESS'){
+                        echo "parllel block stage 1"
+                        sh "exit 1"
+                    }
                 }
                 post {
                     failure{
