@@ -17,7 +17,7 @@ pipeline{
         buildDiscarder(logRotator(numToKeepStr: '4'))
         disableConcurrentBuilds()
         retry(2)
-        parallelAlwaysFailFast()
+        parallelsAlwaysFailFast()
     }
 
     stages{
@@ -106,8 +106,8 @@ pipeline{
             agent { label 'slave1' }
             when {
                 anyOf {
-                environment name: 'APP', value: 'backend'
-                params.stringInput == 'Aditya'
+                    environment name: 'APP', value: 'backend'
+                    params.stringInput == 'Aditya'
                 
                 }
             }
@@ -119,9 +119,9 @@ pipeline{
       stage ('when-allof'){
             agent { label 'slave2' }
             when {
-            allOf{
-                environment name: 'APP', value: 'backend'
-                params.stringInput == 'Aditya'
+                allOf{
+                    environment name: 'APP', value: 'backend'
+                    params.stringInput == 'Aditya'
 
                 }
             }
@@ -152,6 +152,8 @@ pipeline{
             }
         }
       }
+
+    }
     post {
         success{
             echo "stage is success"
@@ -163,11 +165,5 @@ pipeline{
         always{
             echo "running always post block"
         }
-      }
-      
-
-
-
-
-    }
+    }    
 }
