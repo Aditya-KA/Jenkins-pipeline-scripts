@@ -12,6 +12,14 @@ pipeline{
         DB = 'db_url'
     }
 
+    options{
+        timeout(time: 1, unit: 'HOURS')
+        buildDiscarder(logRotator(numToKeepStr: '4'))
+        disableConcurrentBuilds()
+        retry(2)
+        parallelAlwaysFailFast()
+    }
+
     stages{
         
         stage ('calling parameters'){
@@ -60,6 +68,100 @@ pipeline{
               '''
           }
       }
+      stage ('when-env'){
+            agent { label 'slave2' }
+            when {
+                environment name: 'APP', Value: 'frontend'
+            }
+            steps{
+                echo "env is correct"
+            }
+      }
+      stage ('env-expression'){
+            agent { label 'slave1' }
+            when {
+                expression {
+                    params.stringInput == 'Aditya'
+                }
+            }
+            steps{
+                echo "parameter is correct"
+            } 
+      }
+      stage ('env-not'){
+        agent { label 'slave1' }
+        when {
+            not{
+                environment name: 'APP', Value: 'backend'
+                
+            }
+
+        }
+        steps{
+            echo "env is wrong"
+        }
+      }
+
+      stage ('env-anyof'){
+        agent { label 'slave1' }
+        when{
+            anyOf{
+                environment name: 'APP', Value: 'backend'
+                params.stringInput == 'Aditya'
+                
+            }
+        }
+      }
+
+      stage ('when-allof'){
+        agent { label 'slave2' }
+        when{
+            allOf{
+                environment name: 'APP', Value: 'backend'
+                params.stringInput == 'Aditya'
+
+            }
+        }
+      }
+      stage ('parallel'){
+        failFast true
+        parallel{
+            stage ('stage-1'){
+                agent { label 'slave2' }
+                steps{
+                    echo "parllel block stage 1"
+                    sh "exit 1"
+                }
+                post{
+                    failure{
+                        echo "stage is failed"
+                    }
+                }
+            }
+            stage ('stage-2'){
+                agent { label 'slave1' }
+                steps{
+                    echo "parllel stage 2"
+                }
+            }
+        }
+      }
+    post {
+        success{
+            echo "stage is success"
+        }
+
+        failure{
+            echo "stage is failed"
+        }
+        always{
+            echo "running always post block"
+        }
+      }
+      
+
+
+
 
     }
 }
