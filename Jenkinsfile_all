@@ -106,8 +106,7 @@ pipeline{
             agent { label 'slave1' }
             when {
                 anyOf {
-                    environment name: 'APP', value: 'backend'
-                    params.stringInput == 'Aditya'
+                    environment name: 'APP', value: 'backend'; name: 'APP', value: 'frontend'
                 
                 }
             }
@@ -120,8 +119,8 @@ pipeline{
             agent { label 'slave2' }
             when {
                 allOf{
-                    environment name: 'APP', value: 'backend'
-                    params.stringInput == 'Aditya'
+                    environment name: 'APP', value: 'backend'; name: 'APP', value: 'frontend'
+                    
 
                 }
             }
