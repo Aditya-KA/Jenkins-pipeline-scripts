@@ -16,7 +16,7 @@ pipeline{
         timeout(time: 1, unit: 'HOURS')
         buildDiscarder(logRotator(numToKeepStr: '4'))
         disableConcurrentBuilds()
-        retry(2)
+        #retry(2)
         parallelsAlwaysFailFast()
     }
 
