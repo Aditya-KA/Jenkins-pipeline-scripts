@@ -71,7 +71,7 @@ pipeline{
       stage ('when-env'){
             agent { label 'slave2' }
             when {
-                environment name: 'APP', Value: 'frontend'
+                environment name: 'APP', value: 'frontend'
             }
             steps{
                 echo "env is correct"
@@ -92,7 +92,7 @@ pipeline{
         agent { label 'slave1' }
         when {
             not{
-                environment name: 'APP', Value: 'backend'
+                environment name: 'APP', value: 'backend'
                 
             }
 
@@ -103,25 +103,31 @@ pipeline{
       }
 
       stage ('env-anyof'){
-        agent { label 'slave1' }
-        when{
-            anyOf{
-                environment name: 'APP', Value: 'backend'
+            agent { label 'slave1' }
+            when {
+                anyOf {
+                environment name: 'APP', value: 'backend'
                 params.stringInput == 'Aditya'
                 
+                }
             }
-        }
+            steps{
+                echo "anyof stage running"
+            }
       }
 
       stage ('when-allof'){
-        agent { label 'slave2' }
-        when{
+            agent { label 'slave2' }
+            when {
             allOf{
-                environment name: 'APP', Value: 'backend'
+                environment name: 'APP', value: 'backend'
                 params.stringInput == 'Aditya'
 
+                }
             }
-        }
+            steps{
+                echo "alloff stage running"
+            }
       }
       stage ('parallel'){
         failFast true
@@ -132,7 +138,7 @@ pipeline{
                     echo "parllel block stage 1"
                     sh "exit 1"
                 }
-                post{
+                post {
                     failure{
                         echo "stage is failed"
                     }
